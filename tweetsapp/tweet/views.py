@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Tweet
 from .forms import TweetForm
-from django.shortcuts import get_objects_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 # Create your views here.
 
 def index(request):
@@ -27,7 +27,7 @@ def tweet_create(request):
     return render(request, 'tweet_form.html', {'form': form})
 
 def tweet_edit(request, tweet_id):
-    tweet = get_objects_or_404(Tweet, pk=tweet_id, user=request.user) #modelname,pk of which tweet, make sure he's able to edit only his tweet
+    tweet = get_object_or_404(Tweet, pk=tweet_id, user=request.user) #modelname,pk of which tweet, make sure he's able to edit only his tweet
     if request.method == 'POST': 
         form = TweetForm(request.POST, request.FILES, instance=tweet) # extract data and file(if present)
         
@@ -41,7 +41,7 @@ def tweet_edit(request, tweet_id):
     return render(request, 'tweet_form.html', {'form': form})
 
 def tweet_delete(request, tweet_id):
-    tweet = get_objects_or_404(Tweet, pk=tweet_id, user=request.user)
+    tweet = get_object_or_404(Tweet, pk=tweet_id, user=request.user)
     if request.method == 'POST':
         tweet.delete()
         return redirect('tweet_list')
