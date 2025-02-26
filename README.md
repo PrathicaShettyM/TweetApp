@@ -82,3 +82,13 @@ TEMPLATES = [
 - tweetapp\Scripts\activate
 - cd tweetsapp
 - python manage.py runserver
+
+
+
+## assignments
+- search functionality - form, create new view, get search results, based on key words in tweet
+
+## my additionals
+- - profile section
+  - followers
+  - 
