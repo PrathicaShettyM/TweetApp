@@ -87,6 +87,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
 
 # Internationalization
 LANGUAGE_CODE = "en-us"
@@ -96,10 +102,17 @@ USE_TZ = True
 
 # Static & media files
 STATIC_URL = "static/"
-STATICFILE_DIRS=[os.path.join(BASE_DIR,'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 MEDIA_URL='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-LOGIN_URL ='/accounts/login'
-LOGIN_REDIRECT_URL ='/tweet/'
-LOGOUT_REDIRECT_URL ='/tweet/'
+
+AUTH_USER_MODEL = 'tweet.CustomUser'
+
+# Optional: Token lifetime
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
